@@ -6,9 +6,9 @@ Built with **Next.js 16** (App Router) · **TypeScript** · **Tailwind CSS v4** 
 
 ## Highlights
 
-- First-visit preloader, then route-transition curtains between pages
-- Hero with a cursor-driven trail of tattoo photos (auto-cycling stack on touch screens)
-- Scroll-linked manifesto, hover-reveal styles index, zoom-parallax gallery, pinned horizontal process
+- Cinematic hero: fullscreen tattoo frames with a slow zoom and wipe transition, one headline and a progress bar
+- Minimal header with a full-screen menu that previews a piece for each link
+- Zoom-parallax portfolio reveal, pinned styles showcase, full-bleed artist feature, single-review slider
 - Filterable portfolio with a keyboard / swipe lightbox (`/work?style=mandala` deep-links work)
 - 4-step booking enquiry with reference-image upload → email via Resend, with WhatsApp fallback
 - SEO: per-page metadata, generated Open Graph image, sitemap, robots, `TattooParlor`, `FAQPage` and `BlogPosting` JSON-LD
@@ -81,7 +81,7 @@ To use the studio's domain, add it under **Settings → Domains** and follow the
 src/
   app/                 routes (home, work, artists/[slug], studio, aftercare, journal/[slug], book, api/enquiry)
   components/
-    home/              homepage sections (Hero, ImageTrail, StylesIndex, ZoomParallax, Process, …)
+    home/              homepage sections (CinematicHero, Statement, ZoomParallax, StylesSticky, Cinematic, …)
     layout/            Nav, Footer, Preloader
     work/              Gallery + Lightbox
     book/              EnquiryForm

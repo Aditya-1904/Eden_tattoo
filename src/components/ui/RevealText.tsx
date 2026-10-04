@@ -23,10 +23,25 @@ const word: Variants = {
   show: (i: number) => ({ y: "0%", transition: { duration: 1.1, ease: ease.expo, delay: i } }),
 };
 
+type Token = { word: string; emph: boolean; i: number };
+
+/** Splits text into lines of words, marking words inside *asterisk phrases* (which may span words). */
+function tokenize(text: string): Token[][] {
+  let i = 0;
+  let inEmph = false;
+  return text.split("\n").map((line) =>
+    line.split(" ").map((raw) => {
+      if (raw.startsWith("*")) inEmph = true;
+      const emph = inEmph;
+      if (raw.endsWith("*")) inEmph = false;
+      return { word: raw.replace(/\*/g, ""), emph, i: i++ };
+    }),
+  );
+}
+
 /** Masked word-by-word reveal used for editorial headlines. */
 export function RevealText({ text, as = "h2", className, delay = 0, stagger = 0.06, play, once = true }: Props) {
-  const lines = text.split("\n");
-  let index = 0;
+  const lines = tokenize(text);
 
   const animateProps =
     play === undefined
@@ -39,10 +54,7 @@ export function RevealText({ text, as = "h2", className, delay = 0, stagger = 0.
     <motion.span className="block" {...animateProps} aria-hidden>
       {lines.map((line, li) => (
         <span key={li} className="block">
-          {line.split(" ").map((raw, wi, arr) => {
-            const emph = raw.startsWith("*") && raw.endsWith("*") && raw.length > 2;
-            const clean = emph ? raw.slice(1, -1) : raw;
-            const i = index++;
+          {line.map(({ word: clean, emph, i }, wi, arr) => {
             return (
               <Fragment key={wi}>
                 <span className="inline-block overflow-hidden pb-[0.12em] -mb-[0.12em] align-bottom">

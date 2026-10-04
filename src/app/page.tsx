@@ -1,25 +1,19 @@
-import { ArtistTeaser } from "@/components/home/ArtistTeaser";
-import { FinalCTA } from "@/components/home/FinalCTA";
-import { Hero } from "@/components/home/Hero";
-import { Manifesto } from "@/components/home/Manifesto";
-import { Process } from "@/components/home/Process";
-import { Reviews, StyleBand, Visit } from "@/components/home/Sections";
-import { StylesIndex } from "@/components/home/StylesIndex";
+import { ArtistFeature, CinematicCTA, ReviewQuote } from "@/components/home/Cinematic";
+import { CinematicHero } from "@/components/home/CinematicHero";
+import { Statement } from "@/components/home/Statement";
+import { StylesSticky } from "@/components/home/StylesSticky";
 import { ZoomParallax } from "@/components/home/ZoomParallax";
 
 export default function Home() {
   return (
     <>
-      <Hero />
-      <Manifesto />
-      <StyleBand />
-      <StylesIndex />
+      <CinematicHero />
+      <Statement />
       <ZoomParallax />
-      <ArtistTeaser />
-      <Process />
-      <Reviews />
-      <Visit />
-      <FinalCTA />
+      <StylesSticky />
+      <ArtistFeature />
+      <ReviewQuote />
+      <CinematicCTA />
     </>
   );
 }

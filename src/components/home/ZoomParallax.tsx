@@ -54,7 +54,7 @@ export function ZoomParallax() {
           className="pointer-events-none absolute inset-x-0 top-24 z-10 container-x flex items-start justify-between"
         >
           <p className="eyebrow text-ash">
-            <span className="text-copper">(03)</span> — Selected work
+            <span className="text-copper">✦</span>&nbsp;&nbsp;Selected work
           </p>
           <p className="eyebrow max-w-[16rem] text-right text-ash">Scroll — every piece drawn for one person</p>
         </motion.div>

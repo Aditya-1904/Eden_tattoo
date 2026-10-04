@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { FinalCTA } from "@/components/home/FinalCTA";
-import { StyleBand } from "@/components/home/Sections";
+import { Process } from "@/components/home/Process";
+import { StyleBand, Visit } from "@/components/home/Sections";
 import { ButtonLink } from "@/components/ui/Button";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ClipReveal, Reveal } from "@/components/ui/Reveal";
@@ -137,6 +138,8 @@ export default function StudioPage() {
         </Reveal>
       </section>
 
+      <Process />
+      <Visit />
       <FinalCTA title="Come see the *space.*" />
     </>
   );

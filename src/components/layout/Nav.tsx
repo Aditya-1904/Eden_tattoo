@@ -2,12 +2,13 @@
 
 import { useLenis } from "lenis/react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { nav, site, whatsappLink } from "@/content/site";
+import { mapsLink, nav, site, whatsappLink } from "@/content/site";
+import { workBySlug } from "@/content/work";
 import { cn, ease } from "@/lib/utils";
-import { ButtonLink } from "@/components/ui/Button";
 
 function LocalTime() {
   const [time, setTime] = useState<string | null>(null);
@@ -20,8 +21,100 @@ function LocalTime() {
   }, []);
   return (
     <span className="eyebrow tabular-nums text-ash" suppressHydrationWarning>
-      CHD <span className="text-bone">{time ?? "--:--"}</span> IST
+      Chandigarh <span className="text-bone">{time ?? "--:--"}</span> IST
     </span>
+  );
+}
+
+// Each menu entry previews a piece of work on hover.
+const links = [
+  { href: "/", label: "Home", image: "shiva-tandava" },
+  ...nav.map((n, i) => ({ ...n, image: ["mandala-sleeve", "memento-mori", "filigree-forearm", "koi", "tiger-eyes"][i] })),
+  { href: "/book", label: "Book", image: "butterfly-sternum" },
+].map((l) => ({ ...l, piece: workBySlug(l.image)! }));
+
+function MenuOverlay({ pathname }: { pathname: string }) {
+  const current = Math.max(0, links.findIndex((l) => (l.href === "/" ? pathname === "/" : pathname.startsWith(l.href))));
+  const [hover, setHover] = useState<number | null>(null);
+  const shown = hover ?? current;
+
+  return (
+    <motion.div
+      id="site-menu"
+      className="fixed inset-0 z-40 flex flex-col bg-coal"
+      initial={{ clipPath: "inset(0% 0% 100% 0%)" }}
+      animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
+      exit={{ clipPath: "inset(0% 0% 100% 0%)" }}
+      transition={{ duration: 0.9, ease: ease.inout }}
+    >
+      <div className="container-x grid flex-1 items-center gap-10 pt-24 md:grid-cols-12">
+        <nav aria-label="Site" className="md:col-span-7" onPointerLeave={() => setHover(null)}>
+          <ul>
+            {links.map((item, i) => (
+              <li key={item.href} className="overflow-hidden">
+                <motion.div
+                  initial={{ y: "100%" }}
+                  animate={{ y: "0%" }}
+                  exit={{ y: "100%" }}
+                  transition={{ duration: 0.9, ease: ease.expo, delay: 0.25 + i * 0.045 }}
+                >
+                  <Link
+                    href={item.href}
+                    onPointerEnter={() => setHover(i)}
+                    onFocus={() => setHover(i)}
+                    className={cn(
+                      "group flex items-baseline gap-5 py-0.5 font-display text-[12.5vw] leading-[0.98] transition-[color,opacity,transform] duration-500 ease-expo sm:text-7xl lg:text-[5.6vw]",
+                      i === current ? "italic text-copper" : "text-bone",
+                      hover !== null && hover !== i && "opacity-30",
+                      "hover:translate-x-3",
+                    )}
+                  >
+                    <span className="eyebrow w-6 not-italic text-ash">0{i + 1}</span>
+                    {item.label}
+                  </Link>
+                </motion.div>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <motion.div
+          className="relative hidden aspect-[4/5] max-h-[68svh] overflow-hidden md:col-span-4 md:col-start-9 md:block"
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1, ease: ease.expo, delay: 0.35 }}
+        >
+          {links.map((l, i) => (
+            <motion.div
+              key={l.href}
+              className="absolute inset-0"
+              initial={false}
+              animate={{ opacity: i === shown ? 1 : 0, scale: i === shown ? 1 : 1.08 }}
+              transition={{ duration: 0.9, ease: ease.expo }}
+            >
+              <Image src={l.piece.image} alt="" fill sizes="35vw" className="object-cover" />
+            </motion.div>
+          ))}
+          <span className="eyebrow absolute bottom-4 left-4 z-10 text-bone">{links[shown].piece.title}</span>
+        </motion.div>
+      </div>
+
+      <motion.div
+        className="container-x flex flex-wrap items-end justify-between gap-6 border-t hairline py-6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, transition: { delay: 0.6 } }}
+        exit={{ opacity: 0 }}
+      >
+        <div className="eyebrow flex flex-wrap gap-x-8 gap-y-2 text-ash">
+          <a href={site.phoneHref} className="text-bone hover:text-copper">{site.phone}</a>
+          <a href={whatsappLink()} className="hover:text-copper">WhatsApp</a>
+          <a href={site.instagram.url} className="hover:text-copper">Instagram</a>
+          <a href={mapsLink} className="hover:text-copper">{site.address.line2}</a>
+        </div>
+        <LocalTime />
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -29,13 +122,11 @@ export function Nav() {
   const pathname = usePathname();
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (y) => {
     const prev = scrollY.getPrevious() ?? 0;
-    setScrolled(y > 40);
-    setHidden(y > prev && y > 300 && !open);
+    setHidden(y > prev && y > 200);
   });
 
   // Close the menu whenever the route changes.
@@ -50,128 +141,48 @@ export function Nav() {
     document.documentElement.style.overflow = open ? "hidden" : "";
     if (open) lenis?.stop();
     else lenis?.start();
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, [open, lenis]);
 
   return (
     <>
       <motion.header
-        className="fixed inset-x-0 top-0 z-50"
+        className="fixed inset-x-0 top-0 z-50 [text-shadow:0_1px_12px_rgb(10_10_9/0.45)]"
         animate={{ y: hidden && !open ? "-110%" : "0%" }}
         transition={{ duration: 0.7, ease: ease.expo }}
       >
-        <div
-          className={cn(
-            "container-x flex items-center justify-between gap-6 py-5 transition-[background-color,backdrop-filter,padding] duration-700",
-            scrolled && !open && "bg-ink/70 py-4 backdrop-blur-md",
-          )}
-        >
-          <Link href="/" className="group flex items-baseline gap-2" aria-label="Eden Tattoos — home">
-            <span className="font-display text-3xl leading-none tracking-tight">Eden</span>
-            <span className="eyebrow hidden text-ash transition-colors group-hover:text-copper sm:inline">Tattoos — Chd</span>
+        <div className="container-x flex items-center justify-between py-6">
+          <Link href="/" className="font-display text-3xl leading-none tracking-tight text-bone" aria-label="Eden Tattoos — home">
+            Eden
           </Link>
-
-          <nav aria-label="Primary" className="hidden lg:block">
-            <ul className="flex items-center gap-8">
-              {nav.map((item, i) => {
-                const active = pathname.startsWith(item.href);
-                return (
-                  <li key={item.href}>
-                    <Link href={item.href} className="group eyebrow relative flex items-center gap-1.5 py-2">
-                      <span className="text-[9px] text-ash">0{i + 1}</span>
-                      <span className={cn("transition-colors", active ? "text-copper" : "text-bone group-hover:text-copper")}>
-                        {item.label}
-                      </span>
-                      {active && <motion.span layoutId="nav-dot" className="absolute -bottom-1 left-1/2 h-1 w-1 rounded-full bg-copper" />}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-
-          <div className="flex items-center gap-6">
-            <div className="hidden xl:block">
-              <LocalTime />
-            </div>
-            <ButtonLink href="/book" className="hidden px-5 py-3 sm:inline-flex">
+          <div className="flex items-center gap-8">
+            <Link href="/book" className="eyebrow hidden text-bone transition-opacity hover:opacity-60 sm:block">
               Book a session
-            </ButtonLink>
+            </Link>
             <button
               type="button"
               onClick={() => setOpen((o) => !o)}
-              className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-bone/20 lg:hidden"
+              className="group eyebrow flex items-center gap-3 text-bone"
               aria-expanded={open}
-              aria-controls="mobile-menu"
-              aria-label={open ? "Close menu" : "Open menu"}
+              aria-controls="site-menu"
             >
-              <span className="relative block h-2.5 w-5">
-                <span
-                  className={cn(
-                    "absolute left-0 top-0 h-px w-full bg-bone transition-transform duration-500",
-                    open && "translate-y-[5px] rotate-45",
-                  )}
-                />
-                <span
-                  className={cn(
-                    "absolute bottom-0 left-0 h-px w-full bg-bone transition-transform duration-500",
-                    open && "-translate-y-[4px] -rotate-45",
-                  )}
-                />
+              <span className="relative block h-[1.2em] overflow-hidden">
+                <span className={cn("block transition-transform duration-500 ease-expo", open && "-translate-y-full")}>Menu</span>
+                <span className={cn("absolute inset-0 block translate-y-full transition-transform duration-500 ease-expo", open && "translate-y-0")}>Close</span>
+              </span>
+              <span className="relative block h-2 w-6" aria-hidden>
+                <span className={cn("absolute left-0 top-0 h-px w-full bg-bone transition-transform duration-500", open && "translate-y-[3.5px] rotate-45")} />
+                <span className={cn("absolute bottom-0 left-0 h-px w-full bg-bone transition-transform duration-500", open && "-translate-y-[3.5px] -rotate-45")} />
               </span>
             </button>
           </div>
         </div>
       </motion.header>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            id="mobile-menu"
-            className="fixed inset-0 z-40 flex flex-col bg-coal lg:hidden"
-            initial={{ clipPath: "inset(0% 0% 100% 0%)" }}
-            animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
-            exit={{ clipPath: "inset(0% 0% 100% 0%)" }}
-            transition={{ duration: 0.9, ease: ease.inout }}
-          >
-            <nav aria-label="Mobile" className="container-x flex flex-1 flex-col justify-center gap-1 pt-24">
-              {[{ href: "/", label: "Home" }, ...nav, { href: "/book", label: "Book" }].map((item, i) => (
-                <div key={item.href} className="overflow-hidden">
-                  <motion.div
-                    initial={{ y: "100%" }}
-                    animate={{ y: "0%" }}
-                    exit={{ y: "100%" }}
-                    transition={{ duration: 0.9, ease: ease.expo, delay: 0.25 + i * 0.05 }}
-                  >
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        "flex items-baseline gap-4 py-1 font-display text-[13vw] leading-[1] sm:text-7xl",
-                        pathname === item.href ? "text-copper italic" : "text-bone",
-                      )}
-                    >
-                      <span className="eyebrow text-ash">0{i + 1}</span>
-                      {item.label}
-                    </Link>
-                  </motion.div>
-                </div>
-              ))}
-            </nav>
-            <motion.div
-              className="container-x flex flex-wrap items-end justify-between gap-4 border-t hairline py-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { delay: 0.6 } }}
-              exit={{ opacity: 0 }}
-            >
-              <div className="eyebrow space-y-1 text-ash">
-                <a href={site.phoneHref} className="block text-bone">{site.phone}</a>
-                <a href={whatsappLink()} className="block">WhatsApp</a>
-                <a href={site.instagram.url} className="block">Instagram</a>
-              </div>
-              <LocalTime />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <AnimatePresence>{open && <MenuOverlay pathname={pathname} />}</AnimatePresence>
     </>
   );
 }
