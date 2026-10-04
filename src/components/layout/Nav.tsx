@@ -19,8 +19,8 @@ function LocalTime() {
     return () => clearInterval(id);
   }, []);
   return (
-    <span className="eyebrow tabular-nums text-ash" suppressHydrationWarning>
-      CHD <span className="text-bone">{time ?? "--:--"}</span> IST
+    <span className="eyebrow tabular-nums text-graphite" suppressHydrationWarning>
+      CHD <span className="text-ink">{time ?? "--:--"}</span> IST
     </span>
   );
 }
@@ -62,12 +62,12 @@ export function Nav() {
         <div
           className={cn(
             "container-x flex items-center justify-between gap-6 py-5 transition-[background-color,backdrop-filter,padding] duration-700",
-            scrolled && !open && "bg-ink/70 py-4 backdrop-blur-md",
+            scrolled && !open && "bg-paper/70 py-4 backdrop-blur-md",
           )}
         >
           <Link href="/" className="group flex items-baseline gap-2" aria-label="Eden Tattoos — home">
             <span className="font-display text-3xl leading-none tracking-tight">Eden</span>
-            <span className="eyebrow hidden text-ash transition-colors group-hover:text-copper sm:inline">Tattoos — Chd</span>
+            <span className="eyebrow hidden text-graphite transition-colors group-hover:text-stencil sm:inline">Tattoos — Chd</span>
           </Link>
 
           <nav aria-label="Primary" className="hidden lg:block">
@@ -77,11 +77,11 @@ export function Nav() {
                 return (
                   <li key={item.href}>
                     <Link href={item.href} className="group eyebrow relative flex items-center gap-1.5 py-2">
-                      <span className="text-[9px] text-ash">0{i + 1}</span>
-                      <span className={cn("transition-colors", active ? "text-copper" : "text-bone group-hover:text-copper")}>
+                      <span className="text-[9px] text-graphite">0{i + 1}</span>
+                      <span className={cn("transition-colors", active ? "text-stencil" : "text-ink group-hover:text-stencil")}>
                         {item.label}
                       </span>
-                      {active && <motion.span layoutId="nav-dot" className="absolute -bottom-1 left-1/2 h-1 w-1 rounded-full bg-copper" />}
+                      {active && <motion.span layoutId="nav-dot" className="absolute -bottom-1 left-1/2 h-1 w-1 rounded-full bg-stencil" />}
                     </Link>
                   </li>
                 );
@@ -99,7 +99,7 @@ export function Nav() {
             <button
               type="button"
               onClick={() => setOpen((o) => !o)}
-              className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-bone/20 lg:hidden"
+              className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-ink/20 lg:hidden"
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Close menu" : "Open menu"}
@@ -107,13 +107,13 @@ export function Nav() {
               <span className="relative block h-2.5 w-5">
                 <span
                   className={cn(
-                    "absolute left-0 top-0 h-px w-full bg-bone transition-transform duration-500",
+                    "absolute left-0 top-0 h-px w-full bg-ink transition-transform duration-500",
                     open && "translate-y-[5px] rotate-45",
                   )}
                 />
                 <span
                   className={cn(
-                    "absolute bottom-0 left-0 h-px w-full bg-bone transition-transform duration-500",
+                    "absolute bottom-0 left-0 h-px w-full bg-ink transition-transform duration-500",
                     open && "-translate-y-[4px] -rotate-45",
                   )}
                 />
@@ -127,7 +127,7 @@ export function Nav() {
         {open && (
           <motion.div
             id="mobile-menu"
-            className="fixed inset-0 z-40 flex flex-col bg-coal lg:hidden"
+            className="fixed inset-0 z-40 flex flex-col bg-paper-2 lg:hidden"
             initial={{ clipPath: "inset(0% 0% 100% 0%)" }}
             animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
             exit={{ clipPath: "inset(0% 0% 100% 0%)" }}
@@ -146,10 +146,10 @@ export function Nav() {
                       href={item.href}
                       className={cn(
                         "flex items-baseline gap-4 py-1 font-display text-[13vw] leading-[1] sm:text-7xl",
-                        pathname === item.href ? "text-copper italic" : "text-bone",
+                        pathname === item.href ? "text-stencil italic" : "text-ink",
                       )}
                     >
-                      <span className="eyebrow text-ash">0{i + 1}</span>
+                      <span className="eyebrow text-graphite">0{i + 1}</span>
                       {item.label}
                     </Link>
                   </motion.div>
@@ -162,8 +162,8 @@ export function Nav() {
               animate={{ opacity: 1, transition: { delay: 0.6 } }}
               exit={{ opacity: 0 }}
             >
-              <div className="eyebrow space-y-1 text-ash">
-                <a href={site.phoneHref} className="block text-bone">{site.phone}</a>
+              <div className="eyebrow space-y-1 text-graphite">
+                <a href={site.phoneHref} className="block text-ink">{site.phone}</a>
                 <a href={whatsappLink()} className="block">WhatsApp</a>
                 <a href={site.instagram.url} className="block">Instagram</a>
               </div>

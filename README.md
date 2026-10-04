@@ -4,15 +4,29 @@ A dark, editorial portfolio site for **Eden Tattoos**, a custom tattoo & piercin
 
 Built with **Next.js 16** (App Router) · **TypeScript** · **Tailwind CSS v4** · **Motion** · **Lenis** · **React Hook Form + Zod** · **Resend**.
 
+## Concept — "From stencil to skin"
+
+Every tattoo begins as a violet thermal stencil before it becomes ink on skin. The site is built around that:
+warm sketchbook paper, black ink, stencil violet as the single accent, handwritten margin notes and taped prints.
+
 ## Highlights
 
-- First-visit preloader, then route-transition curtains between pages
-- Hero with a cursor-driven trail of tattoo photos (auto-cycling stack on touch screens)
-- Scroll-linked manifesto, hover-reveal styles index, zoom-parallax gallery, pinned horizontal process
+- **Hero:** a procedurally generated mandala traces itself in stencil violet; scrolling turns the lines to ink and the
+  finished tattoo opens out of the mandala's centre to fill the screen
+- **Ink flood:** a soft pool of ink spreads across the page and carries you into the dark zoom-parallax portfolio
+- **Flash wall:** taped prints (one per style) you can drag around, each linking to that style in the portfolio
+- **Process:** a hand-drawn path that traces itself between the four steps as you scroll; line icons draw on
+- Artist signature that writes itself, review notes, and a rubber-stamp "Book" button
 - Filterable portfolio with a keyboard / swipe lightbox (`/work?style=mandala` deep-links work)
 - 4-step booking enquiry with reference-image upload → email via Resend, with WhatsApp fallback
 - SEO: per-page metadata, generated Open Graph image, sitemap, robots, `TattooParlor`, `FAQPage` and `BlogPosting` JSON-LD
-- Custom cursor, magnetic buttons, film grain; respects `prefers-reduced-motion`; responsive down to 320px
+- Respects `prefers-reduced-motion`; responsive down to 320px
+
+### Theming
+
+Colours are semantic tokens in `src/app/globals.css`: `paper` (background), `ink` (text), `stencil` (accent),
+`graphite` (muted). Add the class `theme-ink` to any element to flip it to the dark ink palette — used by the
+portfolio, lightbox and footer.
 
 ## Getting started
 
@@ -81,13 +95,14 @@ To use the studio's domain, add it under **Settings → Domains** and follow the
 src/
   app/                 routes (home, work, artists/[slug], studio, aftercare, journal/[slug], book, api/enquiry)
   components/
-    home/              homepage sections (Hero, ImageTrail, StylesIndex, ZoomParallax, Process, …)
+    home/              homepage sections (StencilHero, InkFlood, ZoomParallax, FlashWall, ProcessPath, …)
+    stencil/           Mandala (+ geometry), handwritten Annotation, TornEdge
     layout/            Nav, Footer, Preloader
     work/              Gallery + Lightbox
     book/              EnquiryForm
     ui/                Button, RevealText, Reveal, Magnetic, Marquee, Cursor, Accordion, PageHeader
     providers/         Lenis smooth scroll + Motion config
   content/             all editable studio content
-  assets/              portfolio photos + display font (used for the OG image)
+  assets/              portfolio photos + fonts used by the generated OG image
   lib/                 utilities, enquiry schema, hooks
 ```

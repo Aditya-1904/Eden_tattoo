@@ -31,16 +31,16 @@ export default function JournalPage() {
             <Image src={lead.cover} alt="" fill sizes="(max-width: 768px) 100vw, 60vw" placeholder="blur" className="object-cover transition-transform duration-[1.6s] ease-expo group-hover:scale-105" />
           </ClipReveal>
           <Reveal className="flex flex-col justify-between gap-8 md:col-span-5">
-            <p className="eyebrow flex gap-4 text-ash">
-              <span className="text-copper">{lead.category}</span>
+            <p className="eyebrow flex gap-4 text-graphite">
+              <span className="text-stencil">{lead.category}</span>
               <span>{formatDate(lead.date)}</span>
               <span>{readingTime(lead)} min read</span>
             </p>
             <div>
-              <h2 className="font-display text-big leading-[1] transition-colors duration-500 group-hover:text-copper">{lead.title}</h2>
-              <p className="mt-6 max-w-md leading-relaxed text-bone/60">{lead.excerpt}</p>
+              <h2 className="font-display text-big leading-[1] transition-colors duration-500 group-hover:text-stencil">{lead.title}</h2>
+              <p className="mt-6 max-w-md leading-relaxed text-ink/60">{lead.excerpt}</p>
             </div>
-            <span className="eyebrow inline-flex items-center gap-3 text-copper">
+            <span className="eyebrow inline-flex items-center gap-3 text-stencil">
               Read article <Arrow className="transition-transform duration-500 group-hover:rotate-45" />
             </span>
           </Reveal>
@@ -50,12 +50,12 @@ export default function JournalPage() {
           {rest.map((post, i) => (
             <li key={post.slug} className="border-b hairline">
               <Link href={`/journal/${post.slug}`} data-cursor="Read" className="group grid items-center gap-4 py-8 md:grid-cols-12 md:gap-8">
-                <span className="eyebrow text-ash md:col-span-1">0{i + 2}</span>
-                <span className="eyebrow text-copper md:col-span-2">{post.category}</span>
+                <span className="eyebrow text-graphite md:col-span-1">0{i + 2}</span>
+                <span className="eyebrow text-stencil md:col-span-2">{post.category}</span>
                 <span className="font-display text-4xl leading-[1.05] transition-all duration-700 ease-expo group-hover:translate-x-3 group-hover:italic md:col-span-6 md:text-5xl">
                   {post.title}
                 </span>
-                <span className="eyebrow text-ash md:col-span-2">{formatDate(post.date)}</span>
+                <span className="eyebrow text-graphite md:col-span-2">{formatDate(post.date)}</span>
                 <span className="relative hidden aspect-square w-16 overflow-hidden md:col-span-1 md:block md:justify-self-end">
                   <Image src={post.cover} alt="" fill sizes="64px" className="object-cover grayscale transition duration-700 group-hover:grayscale-0" />
                 </span>

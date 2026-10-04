@@ -48,7 +48,7 @@ function Chip({ active, children, ...rest }: { active: boolean; children: React.
       aria-pressed={active}
       className={cn(
         "rounded-full border px-5 py-3 text-sm transition-all duration-500 ease-expo",
-        active ? "border-copper bg-copper text-ink" : "border-bone/15 text-bone/75 hover:border-bone/40 hover:text-bone",
+        active ? "border-stencil bg-stencil text-paper" : "border-ink/15 text-ink/75 hover:border-ink/40 hover:text-ink",
       )}
       {...rest}
     >
@@ -61,13 +61,13 @@ function Field({ label, error, children, hint }: { label: string; error?: string
   return (
     <div>
       <div className="mb-3 flex items-baseline justify-between gap-4">
-        <span className="eyebrow text-ash">{label}</span>
-        {hint && <span className="eyebrow text-ash/60">{hint}</span>}
+        <span className="eyebrow text-graphite">{label}</span>
+        {hint && <span className="eyebrow text-graphite/60">{hint}</span>}
       </div>
       {children}
       <AnimatePresence>
         {error && (
-          <motion.p role="alert" initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mt-2 text-sm text-copper-light">
+          <motion.p role="alert" initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mt-2 text-sm text-stencil-light">
             {error}
           </motion.p>
         )}
@@ -77,7 +77,7 @@ function Field({ label, error, children, hint }: { label: string; error?: string
 }
 
 const inputCls =
-  "w-full border-b border-bone/20 bg-transparent py-3 text-lg text-bone placeholder:text-bone/25 transition-colors focus:border-copper focus:outline-none";
+  "w-full border-b border-ink/20 bg-transparent py-3 text-lg text-ink placeholder:text-ink/25 transition-colors focus:border-stencil focus:outline-none";
 
 export function EnquiryForm({ initialArtist, initialStyle }: { initialArtist?: string; initialStyle?: string }) {
   const [step, setStep] = useState(0);
@@ -180,20 +180,20 @@ export function EnquiryForm({ initialArtist, initialStyle }: { initialArtist?: s
   if (status === "sent" || status === "fallback") {
     const sent = status === "sent";
     return (
-      <motion.div id="enquiry" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: ease.expo }} className="scroll-mt-28 border hairline bg-coal p-8 md:p-14">
-        <p className="eyebrow text-copper">{sent ? "Enquiry received" : "One last step"}</p>
+      <motion.div id="enquiry" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: ease.expo }} className="scroll-mt-28 border hairline bg-paper-2 p-8 md:p-14">
+        <p className="eyebrow text-stencil">{sent ? "Enquiry received" : "One last step"}</p>
         <h2 className="mt-6 font-display text-huge leading-[0.92]">
           {sent ? (
             <>
-              Thank <span className="italic text-copper">you.</span>
+              Thank <span className="italic text-stencil">you.</span>
             </>
           ) : (
             <>
-              Send it on <span className="italic text-copper">WhatsApp</span>
+              Send it on <span className="italic text-stencil">WhatsApp</span>
             </>
           )}
         </h2>
-        <p className="mt-6 max-w-lg text-lg leading-relaxed text-bone/70">
+        <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink/70">
           {sent
             ? "We've got your idea. Your artist will look it over and reply within a day or two with thoughts, a quote and available dates."
             : "Tap below to send your enquiry straight to the studio on WhatsApp — everything you filled in is already written out for you."}
@@ -229,9 +229,9 @@ export function EnquiryForm({ initialArtist, initialStyle }: { initialArtist?: s
           {STEPS.map((s, i) => (
             <li key={s.title} aria-current={i === step ? "step" : undefined}>
               <div className="relative h-px bg-line">
-                <motion.div className="absolute inset-0 origin-left bg-copper" animate={{ scaleX: i <= step ? 1 : 0 }} transition={{ duration: 0.8, ease: ease.expo }} />
+                <motion.div className="absolute inset-0 origin-left bg-stencil" animate={{ scaleX: i <= step ? 1 : 0 }} transition={{ duration: 0.8, ease: ease.expo }} />
               </div>
-              <p className={cn("eyebrow mt-3 hidden transition-colors sm:block", i <= step ? "text-bone" : "text-ash/60")}>
+              <p className={cn("eyebrow mt-3 hidden transition-colors sm:block", i <= step ? "text-ink" : "text-graphite/60")}>
                 0{i + 1} {s.title}
               </p>
             </li>
@@ -250,7 +250,7 @@ export function EnquiryForm({ initialArtist, initialStyle }: { initialArtist?: s
               className="space-y-12"
             >
               <legend className="mb-12">
-                <span className="eyebrow text-copper">
+                <span className="eyebrow text-stencil">
                   Step 0{step + 1} / 0{STEPS.length}
                 </span>
                 <span className="mt-4 block font-display text-big leading-[1]">{STEPS[step].label}</span>
@@ -318,15 +318,15 @@ export function EnquiryForm({ initialArtist, initialStyle }: { initialArtist?: s
                               onClick={() => field.onChange(s.id)}
                               className={cn(
                                 "flex flex-col items-start gap-6 border p-4 text-left transition-all duration-500",
-                                field.value === s.id ? "border-copper bg-copper/10" : "border-bone/15 hover:border-bone/40",
+                                field.value === s.id ? "border-stencil bg-stencil/10" : "border-ink/15 hover:border-ink/40",
                               )}
                             >
                               <span className="flex h-10 items-end">
-                                <span className={cn("block rounded-full border", field.value === s.id ? "border-copper" : "border-bone/40")} style={{ width: 8 + i * 8, height: 8 + i * 8 }} />
+                                <span className={cn("block rounded-full border", field.value === s.id ? "border-stencil" : "border-ink/40")} style={{ width: 8 + i * 8, height: 8 + i * 8 }} />
                               </span>
                               <span>
                                 <span className="block font-display text-2xl leading-none">{s.label}</span>
-                                <span className="eyebrow mt-2 block text-ash">{s.hint}</span>
+                                <span className="eyebrow mt-2 block text-graphite">{s.hint}</span>
                               </span>
                             </button>
                           ))}
@@ -356,7 +356,7 @@ export function EnquiryForm({ initialArtist, initialStyle }: { initialArtist?: s
                 <Field label="Reference images — optional" hint={`${refs.length}/${MAX_FILES}`}>
                   <label
                     className={cn(
-                      "group flex min-h-56 flex-col items-center justify-center gap-4 border border-dashed border-bone/20 p-8 text-center transition-colors hover:border-copper",
+                      "group flex min-h-56 flex-col items-center justify-center gap-4 border border-dashed border-ink/20 p-8 text-center transition-colors hover:border-stencil",
                       refs.length >= MAX_FILES && "pointer-events-none opacity-40",
                     )}
                     onDragOver={(e) => e.preventDefault()}
@@ -365,9 +365,9 @@ export function EnquiryForm({ initialArtist, initialStyle }: { initialArtist?: s
                       addFiles(e.dataTransfer.files);
                     }}
                   >
-                    <span className="font-display text-4xl italic text-copper transition-transform duration-500 group-hover:-translate-y-1">+</span>
+                    <span className="font-display text-4xl italic text-stencil transition-transform duration-500 group-hover:-translate-y-1">+</span>
                     <span className="font-display text-3xl">Drop images or tap to upload</span>
-                    <span className="eyebrow text-ash">Up to {MAX_FILES} photos — placement shots, inspiration, old tattoos to cover</span>
+                    <span className="eyebrow text-graphite">Up to {MAX_FILES} photos — placement shots, inspiration, old tattoos to cover</span>
                     <input type="file" accept="image/*" multiple className="sr-only" onChange={(e) => addFiles(e.target.files)} disabled={refs.length >= MAX_FILES} />
                   </label>
                   {refs.length > 0 && (
@@ -378,7 +378,7 @@ export function EnquiryForm({ initialArtist, initialStyle }: { initialArtist?: s
                           <button
                             type="button"
                             onClick={() => removeRef(r.id)}
-                            className="eyebrow absolute right-2 top-2 rounded-full bg-ink/80 px-3 py-1.5 text-bone backdrop-blur transition-colors hover:text-copper"
+                            className="eyebrow absolute right-2 top-2 rounded-full bg-paper/80 px-3 py-1.5 text-ink backdrop-blur transition-colors hover:text-stencil"
                             aria-label="Remove image"
                           >
                             ✕
@@ -442,19 +442,19 @@ export function EnquiryForm({ initialArtist, initialStyle }: { initialArtist?: s
                   <div className="space-y-4">
                     <label className="flex cursor-pointer items-center gap-4">
                       <input type="checkbox" {...register("firstTattoo")} className="peer sr-only" />
-                      <span className="flex h-5 w-5 items-center justify-center border border-bone/30 text-transparent transition-colors peer-checked:border-copper peer-checked:bg-copper peer-checked:text-ink peer-focus-visible:outline peer-focus-visible:outline-1 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-copper">
+                      <span className="flex h-5 w-5 items-center justify-center border border-ink/30 text-transparent transition-colors peer-checked:border-stencil peer-checked:bg-stencil peer-checked:text-paper peer-focus-visible:outline peer-focus-visible:outline-1 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-stencil">
                         ✓
                       </span>
-                      <span className="text-bone/80">This is my first tattoo</span>
+                      <span className="text-ink/80">This is my first tattoo</span>
                     </label>
                     <label className="flex cursor-pointer items-center gap-4">
                       <input type="checkbox" {...register("adult")} className="peer sr-only" />
-                      <span className="flex h-5 w-5 items-center justify-center border border-bone/30 text-transparent transition-colors peer-checked:border-copper peer-checked:bg-copper peer-checked:text-ink peer-focus-visible:outline peer-focus-visible:outline-1 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-copper">
+                      <span className="flex h-5 w-5 items-center justify-center border border-ink/30 text-transparent transition-colors peer-checked:border-stencil peer-checked:bg-stencil peer-checked:text-paper peer-focus-visible:outline peer-focus-visible:outline-1 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-stencil">
                         ✓
                       </span>
-                      <span className="text-bone/80">I confirm I am 18 or older</span>
+                      <span className="text-ink/80">I confirm I am 18 or older</span>
                     </label>
-                    {errors.adult && <p role="alert" className="text-sm text-copper-light">{errors.adult.message}</p>}
+                    {errors.adult && <p role="alert" className="text-sm text-stencil-light">{errors.adult.message}</p>}
                   </div>
                   <div className="absolute -left-[9999px]" aria-hidden>
                     <label>
@@ -469,7 +469,7 @@ export function EnquiryForm({ initialArtist, initialStyle }: { initialArtist?: s
         </div>
 
         {serverError && (
-          <p role="alert" className="mt-8 border border-copper/40 p-4 text-copper-light">
+          <p role="alert" className="mt-8 border border-stencil/40 p-4 text-stencil-light">
             {serverError}{" "}
             <a className="underline" href={whatsappLink(waMessage(values))}>
               Send on WhatsApp instead →
@@ -495,8 +495,8 @@ export function EnquiryForm({ initialArtist, initialStyle }: { initialArtist?: s
 
       {/* Live summary */}
       <aside className="lg:col-span-4">
-        <div className="border hairline bg-coal p-8 lg:sticky lg:top-28">
-          <p className="eyebrow text-ash">Your enquiry</p>
+        <div className="border hairline bg-paper-2 p-8 lg:sticky lg:top-28">
+          <p className="eyebrow text-graphite">Your enquiry</p>
           <dl className="mt-6 space-y-4">
             {[
               ["Style", values.styles?.map(label).join(", ")],
@@ -507,15 +507,15 @@ export function EnquiryForm({ initialArtist, initialStyle }: { initialArtist?: s
               ["Artist", values.artist === "any" ? "First available" : artists.find((a) => a.slug === values.artist)?.name],
             ].map(([k, v]) => (
               <div key={k} className="flex items-baseline justify-between gap-4 border-b hairline pb-3">
-                <dt className="eyebrow text-ash">{k}</dt>
-                <dd className={cn("text-right font-display text-xl", !v && "text-bone/20")}>{v || "—"}</dd>
+                <dt className="eyebrow text-graphite">{k}</dt>
+                <dd className={cn("text-right font-display text-xl", !v && "text-ink/20")}>{v || "—"}</dd>
               </div>
             ))}
           </dl>
-          <p className="mt-8 text-sm leading-relaxed text-bone/50">
+          <p className="mt-8 text-sm leading-relaxed text-ink/50">
             No commitment — this simply starts the conversation. We reply with ideas, a quote and dates.
           </p>
-          <a href={whatsappLink("Hi Eden Tattoos! I'd like to enquire about a tattoo.")} className="eyebrow mt-6 inline-block border-b border-copper pb-1 text-copper">
+          <a href={whatsappLink("Hi Eden Tattoos! I'd like to enquire about a tattoo.")} className="eyebrow mt-6 inline-block border-b border-stencil pb-1 text-stencil">
             Prefer to just chat? WhatsApp →
           </a>
         </div>

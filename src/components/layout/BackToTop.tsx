@@ -8,7 +8,7 @@ export function BackToTop() {
     <button
       type="button"
       onClick={() => (lenis ? lenis.scrollTo(0, { duration: 1.6 }) : window.scrollTo({ top: 0, behavior: "smooth" }))}
-      className="eyebrow text-ash transition-colors hover:text-copper"
+      className="eyebrow text-graphite transition-colors hover:text-stencil"
     >
       Back to top ↑
     </button>

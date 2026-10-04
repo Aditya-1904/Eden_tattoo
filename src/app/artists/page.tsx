@@ -41,19 +41,19 @@ export default function ArtistsPage() {
               </ClipReveal>
               <div className="mt-6 flex items-start justify-between gap-6 border-b hairline pb-6">
                 <div>
-                  <p className="eyebrow text-ash">
-                    <span className="text-copper">0{i + 1}</span> — {a.role}
+                  <p className="eyebrow text-graphite">
+                    <span className="text-stencil">0{i + 1}</span> — {a.role}
                   </p>
-                  <h2 className="mt-3 font-display text-6xl leading-none transition-[color] duration-500 group-hover:italic group-hover:text-copper md:text-7xl">
+                  <h2 className="mt-3 font-display text-6xl leading-none transition-[color] duration-500 group-hover:italic group-hover:text-stencil md:text-7xl">
                     {a.name}
                   </h2>
                 </div>
-                <Arrow className="mt-2 h-6 w-6 transition-transform duration-500 group-hover:rotate-45 group-hover:text-copper" />
+                <Arrow className="mt-2 h-6 w-6 transition-transform duration-500 group-hover:rotate-45 group-hover:text-stencil" />
               </div>
             </Link>
             <ul className="mt-5 flex flex-wrap gap-2">
               {a.specialties.map((s) => (
-                <li key={s} className="eyebrow rounded-full border border-bone/15 px-3 py-1.5 text-bone/70">
+                <li key={s} className="eyebrow rounded-full border border-ink/15 px-3 py-1.5 text-ink/70">
                   {styleName(s)}
                 </li>
               ))}
@@ -61,15 +61,15 @@ export default function ArtistsPage() {
           </article>
         ))}
 
-        <Reveal className="flex flex-col justify-between gap-10 border hairline bg-coal p-8 md:aspect-[4/5] md:p-12">
-          <p className="eyebrow text-ash">
-            <span className="text-copper">+</span> — Guest spots
+        <Reveal className="flex flex-col justify-between gap-10 border hairline bg-paper-2 p-8 md:aspect-[4/5] md:p-12">
+          <p className="eyebrow text-graphite">
+            <span className="text-stencil">+</span> — Guest spots
           </p>
           <div>
             <h2 className="font-display text-5xl leading-[0.95] md:text-6xl">
-              Are you an <span className="italic text-copper">artist?</span>
+              Are you an <span className="italic text-stencil">artist?</span>
             </h2>
-            <p className="mt-6 max-w-sm leading-relaxed text-bone/65">
+            <p className="mt-6 max-w-sm leading-relaxed text-ink/65">
               We welcome guest artists and apprentices who care about craft as much as we do. Send us your portfolio.
             </p>
           </div>

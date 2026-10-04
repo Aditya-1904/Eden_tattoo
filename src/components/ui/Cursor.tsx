@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useMediaQuery } from "@/lib/hooks";
 
 /**
- * A copper dot that replaces the native cursor on fine pointers.
+ * A stencil-violet dot that replaces the native cursor on fine pointers.
  * - Grows into a ring over links/buttons.
  * - Shows a label over any element with `data-cursor="Label"`.
  */
@@ -89,8 +89,8 @@ export function Cursor() {
           height: size,
           opacity: hidden ? 0 : 1,
           scale: down ? 0.85 : 1,
-          backgroundColor: mode === "link" ? "rgba(196,138,85,0)" : "rgba(196,138,85,1)",
-          borderColor: mode === "link" ? "rgba(196,138,85,0.9)" : "rgba(196,138,85,0)",
+          backgroundColor: mode === "link" ? "rgba(90,72,230,0)" : "rgba(90,72,230,1)",
+          borderColor: mode === "link" ? "rgba(90,72,230,0.9)" : "rgba(90,72,230,0)",
         }}
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
         style={{ borderWidth: 1, borderStyle: "solid" }}
@@ -99,7 +99,7 @@ export function Cursor() {
           <motion.span
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="eyebrow text-[10px] text-ink"
+            className="eyebrow text-[10px] text-paper"
           >
             {label}
           </motion.span>

@@ -4,12 +4,12 @@ import { cn } from "@/lib/utils";
 type Variant = "solid" | "outline" | "ghost";
 
 const base =
-  "group/btn relative inline-flex items-center gap-3 overflow-hidden rounded-full eyebrow transition-colors duration-500 ease-expo focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-copper disabled:pointer-events-none disabled:opacity-40";
+  "group/btn relative inline-flex items-center gap-3 overflow-hidden rounded-full eyebrow transition-colors duration-500 ease-expo focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-stencil disabled:pointer-events-none disabled:opacity-40";
 
 const variants: Record<Variant, string> = {
-  solid: "bg-bone text-ink hover:bg-copper px-6 py-4",
-  outline: "border border-bone/25 text-bone hover:border-copper hover:text-copper px-6 py-4",
-  ghost: "text-bone hover:text-copper px-0 py-2",
+  solid: "bg-ink text-paper hover:bg-stencil px-6 py-4",
+  outline: "border border-ink/25 text-ink hover:border-stencil hover:text-stencil px-6 py-4",
+  ghost: "text-ink hover:text-stencil px-0 py-2",
 };
 
 /** Label that rolls up to a duplicate on hover. */
@@ -84,10 +84,10 @@ export function Button({
   );
 }
 
-/** Underlined text link with a sweeping copper underline. */
+/** Underlined text link with a sweeping stencil-violet underline. */
 export function TextLink({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) {
   const cls = cn(
-    "relative inline-block after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-copper after:transition-transform after:duration-500 after:ease-expo hover:after:origin-left hover:after:scale-x-100",
+    "relative inline-block after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-stencil after:transition-transform after:duration-500 after:ease-expo hover:after:origin-left hover:after:scale-x-100",
     className,
   );
   if (href.startsWith("http") || href.startsWith("tel:") || href.startsWith("mailto:")) {

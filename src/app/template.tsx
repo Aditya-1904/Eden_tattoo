@@ -23,13 +23,13 @@ export default function Template({ children }: { children: React.ReactNode }) {
       {curtain && (
         <motion.div
           aria-hidden
-          className="pointer-events-none fixed inset-0 z-[80] flex items-end bg-coal"
+          className="pointer-events-none fixed inset-0 z-[80] flex items-end bg-paper-2"
           initial={{ clipPath: "inset(0% 0% 0% 0%)" }}
           animate={{ clipPath: "inset(0% 0% 100% 0%)" }}
           transition={{ duration: 0.95, ease: ease.inout, delay: 0.15 }}
           onAnimationComplete={() => setCurtain(false)}
         >
-          <span className="container-x eyebrow pb-6 text-ash">Eden Tattoos</span>
+          <span className="container-x eyebrow pb-6 text-graphite">Eden Tattoos</span>
         </motion.div>
       )}
       {children}

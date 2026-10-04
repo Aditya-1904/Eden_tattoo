@@ -16,8 +16,8 @@ export function PageHeader({
 }) {
   return (
     <header className="container-x pb-16 pt-36 md:pb-24 md:pt-48">
-      <p className="eyebrow text-ash">
-        <span className="text-copper">({index})</span> — {eyebrow}
+      <p className="eyebrow text-graphite">
+        <span className="text-stencil">({index})</span> — {eyebrow}
       </p>
       <div className="mt-8 grid gap-10 md:grid-cols-12 md:items-end">
         <RevealText
@@ -28,7 +28,7 @@ export function PageHeader({
         />
         {intro && (
           <Reveal delay={0.3} className="md:col-span-4">
-            <p className="text-lg leading-relaxed text-bone/70">{intro}</p>
+            <p className="text-lg leading-relaxed text-ink/70">{intro}</p>
             {children}
           </Reveal>
         )}

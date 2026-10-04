@@ -24,8 +24,8 @@ export function Accordion({ items }: { items: { q: string; a: string }[] }) {
                 className="group flex w-full items-center justify-between gap-6 py-7 text-left"
               >
                 <span className="flex items-baseline gap-5">
-                  <span className="eyebrow text-ash">0{i + 1}</span>
-                  <span className={cn("font-display text-2xl leading-tight transition-colors duration-500 md:text-4xl", isOpen ? "italic text-copper" : "group-hover:text-copper")}>
+                  <span className="eyebrow text-graphite">0{i + 1}</span>
+                  <span className={cn("font-display text-2xl leading-tight transition-colors duration-500 md:text-4xl", isOpen ? "italic text-stencil" : "group-hover:text-stencil")}>
                     {item.q}
                   </span>
                 </span>
@@ -47,7 +47,7 @@ export function Accordion({ items }: { items: { q: string; a: string }[] }) {
                   transition={{ duration: 0.6, ease: ease.expo }}
                   className="overflow-hidden"
                 >
-                  <p className="max-w-2xl pb-8 pl-10 leading-relaxed text-bone/65 md:pl-12">{item.a}</p>
+                  <p className="max-w-2xl pb-8 pl-10 leading-relaxed text-ink/65 md:pl-12">{item.a}</p>
                 </motion.div>
               )}
             </AnimatePresence>

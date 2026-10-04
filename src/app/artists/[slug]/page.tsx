@@ -34,32 +34,32 @@ export default async function ArtistPage({ params }: PageProps<"/artists/[slug]"
     <>
       <section className="container-x grid gap-12 pb-24 pt-36 md:grid-cols-12 md:pt-44">
         <div className="md:col-span-7">
-          <p className="eyebrow text-ash">
-            <TextLink href="/artists">Artists</TextLink> <span className="text-copper">/</span> {artist.role}
+          <p className="eyebrow text-graphite">
+            <TextLink href="/artists">Artists</TextLink> <span className="text-stencil">/</span> {artist.role}
           </p>
           <RevealText as="h1" text={artist.name} className="mt-6 font-display text-mega italic leading-[0.78] tracking-[-0.045em]" />
           <Reveal delay={0.3} className="mt-12 grid gap-10 md:grid-cols-7">
             <div className="md:col-span-4">
-              <p className="text-xl leading-relaxed text-bone/85 md:text-2xl">{artist.intro}</p>
+              <p className="text-xl leading-relaxed text-ink/85 md:text-2xl">{artist.intro}</p>
               {artist.bio.map((p) => (
-                <p key={p.slice(0, 20)} className="mt-5 leading-relaxed text-bone/60">
+                <p key={p.slice(0, 20)} className="mt-5 leading-relaxed text-ink/60">
                   {p}
                 </p>
               ))}
             </div>
             <div className="md:col-span-3">
-              <p className="eyebrow mb-4 text-ash">Specialties</p>
+              <p className="eyebrow mb-4 text-graphite">Specialties</p>
               <ul className="space-y-2 border-t hairline pt-4">
                 {artist.specialties.map((s, i) => (
                   <li key={s} className="flex items-baseline justify-between border-b hairline pb-2 font-display text-2xl">
-                    {styleName(s)} <span className="eyebrow text-ash">0{i + 1}</span>
+                    {styleName(s)} <span className="eyebrow text-graphite">0{i + 1}</span>
                   </li>
                 ))}
               </ul>
               <div className="mt-8 flex flex-col items-start gap-4">
                 <ButtonLink href={`/book?artist=${artist.slug}`}>Book with {artist.name}</ButtonLink>
                 {artist.instagram && (
-                  <TextLink href={artist.instagram} className="eyebrow text-ash">
+                  <TextLink href={artist.instagram} className="eyebrow text-graphite">
                     Instagram ↗
                   </TextLink>
                 )}
@@ -77,9 +77,9 @@ export default async function ArtistPage({ params }: PageProps<"/artists/[slug]"
       <section className="pb-12">
         <div className="container-x mb-10 flex items-end justify-between border-t hairline pt-10">
           <h2 className="font-display text-big leading-none">
-            Work by <span className="italic text-copper">{artist.name}</span>
+            Work by <span className="italic text-stencil">{artist.name}</span>
           </h2>
-          <span className="eyebrow text-ash">{pieces.length} pieces</span>
+          <span className="eyebrow text-graphite">{pieces.length} pieces</span>
         </div>
         <Gallery items={pieces} showFilters={false} />
       </section>

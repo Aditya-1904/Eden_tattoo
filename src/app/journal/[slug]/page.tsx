@@ -70,15 +70,15 @@ export default async function PostPage({ params }: PageProps<"/journal/[slug]">)
       <article>
         <header className="container-x grid gap-12 pb-10 pt-36 md:grid-cols-12 md:items-end md:pt-48">
           <div className="md:col-span-7">
-            <p className="eyebrow flex flex-wrap gap-4 text-ash">
+            <p className="eyebrow flex flex-wrap gap-4 text-graphite">
               <TextLink href="/journal">Journal</TextLink>
-              <span className="text-copper">{post.category}</span>
+              <span className="text-stencil">{post.category}</span>
               <span>{formatDate(post.date)}</span>
               <span>{readingTime(post)} min read</span>
             </p>
             <RevealText as="h1" text={post.title} stagger={0.04} className="mt-8 font-display text-huge leading-[0.95] tracking-[-0.02em]" />
             <Reveal delay={0.3}>
-              <p className="mt-8 max-w-lg text-xl leading-relaxed text-bone/70">{post.excerpt}</p>
+              <p className="mt-8 max-w-lg text-xl leading-relaxed text-ink/70">{post.excerpt}</p>
             </Reveal>
           </div>
           <ClipReveal className="relative aspect-[4/5] overflow-hidden md:col-span-4 md:col-start-9">
@@ -88,8 +88,8 @@ export default async function PostPage({ params }: PageProps<"/journal/[slug]">)
 
         <div className="container-x grid gap-10 py-20 md:grid-cols-12 md:py-28">
           <aside className="md:col-span-3">
-            <p className="eyebrow text-ash md:sticky md:top-28">
-              <span className="text-copper">Eden</span> — Journal
+            <p className="eyebrow text-graphite md:sticky md:top-28">
+              <span className="text-stencil">Eden</span> — Journal
             </p>
           </aside>
           <Reveal className="prose-eden md:col-span-7">{post.body.map(renderBlock)}</Reveal>
@@ -98,8 +98,8 @@ export default async function PostPage({ params }: PageProps<"/journal/[slug]">)
 
       {next && next.slug !== post.slug && (
         <Link href={`/journal/${next.slug}`} data-cursor="Next" className="group container-x block border-y hairline py-16 md:py-24">
-          <p className="eyebrow text-ash">Next article →</p>
-          <p className="mt-6 font-display text-big leading-[1] transition-all duration-700 ease-expo group-hover:translate-x-4 group-hover:italic group-hover:text-copper">
+          <p className="eyebrow text-graphite">Next article →</p>
+          <p className="mt-6 font-display text-big leading-[1] transition-all duration-700 ease-expo group-hover:translate-x-4 group-hover:italic group-hover:text-stencil">
             {next.title}
           </p>
         </Link>

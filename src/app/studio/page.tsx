@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { FinalCTA } from "@/components/home/FinalCTA";
-import { StyleBand } from "@/components/home/Sections";
+import { StyleBand, Visit } from "@/components/home/Sections";
 import { ButtonLink } from "@/components/ui/Button";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ClipReveal, Reveal } from "@/components/ui/Reveal";
@@ -48,8 +48,8 @@ export default function StudioPage() {
       </section>
 
       <section className="container-x grid gap-10 py-28 md:grid-cols-12 md:py-40">
-        <p className="eyebrow text-ash md:col-span-3">
-          <span className="text-copper">(01)</span> — Philosophy
+        <p className="eyebrow text-graphite md:col-span-3">
+          <span className="text-stencil">(01)</span> — Philosophy
         </p>
         <div className="md:col-span-8">
           <RevealText
@@ -58,7 +58,7 @@ export default function StudioPage() {
             stagger={0.03}
             className="font-display text-big leading-[1.05]"
           />
-          <Reveal delay={0.2} className="mt-10 grid gap-8 text-bone/65 md:grid-cols-2">
+          <Reveal delay={0.2} className="mt-10 grid gap-8 text-ink/65 md:grid-cols-2">
             <p className="leading-relaxed">
               Every design starts with you: the story, the meaning, the placement. Your artist builds the piece around the
               shape of your body so it flows with the muscle and reads beautifully from every angle.
@@ -75,8 +75,8 @@ export default function StudioPage() {
 
       <section className="container-x py-28 md:py-40">
         <div className="grid gap-10 md:grid-cols-12">
-          <p className="eyebrow text-ash md:col-span-3">
-            <span className="text-copper">(02)</span> — Hygiene &amp; safety
+          <p className="eyebrow text-graphite md:col-span-3">
+            <span className="text-stencil">(02)</span> — Hygiene &amp; safety
           </p>
           <RevealText as="h2" text="Clean is *non-negotiable*" className="font-display text-huge leading-[0.95] md:col-span-9" />
         </div>
@@ -84,9 +84,9 @@ export default function StudioPage() {
           {standards.map((s, i) => (
             <Reveal key={s.title} delay={i * 0.08} className="border-b hairline py-10 sm:border-r sm:px-8 sm:first:pl-0 lg:last:border-r-0">
               <div>
-                <span className="eyebrow text-copper">0{i + 1}</span>
+                <span className="eyebrow text-stencil">0{i + 1}</span>
                 <h3 className="mt-8 font-display text-4xl leading-none">{s.title}</h3>
-                <p className="mt-4 leading-relaxed text-bone/60">{s.text}</p>
+                <p className="mt-4 leading-relaxed text-ink/60">{s.text}</p>
               </div>
             </Reveal>
           ))}
@@ -94,16 +94,16 @@ export default function StudioPage() {
       </section>
 
       <section className="container-x grid gap-4 pb-28 md:grid-cols-2 md:pb-40">
-        <Reveal className="flex flex-col justify-between gap-12 border hairline bg-coal p-8 md:min-h-[560px] md:p-12">
+        <Reveal className="flex flex-col justify-between gap-12 border hairline bg-paper-2 p-8 md:min-h-[560px] md:p-12">
           <div className="flex items-start justify-between">
-            <p className="eyebrow text-ash">
-              <span className="text-copper">(03)</span> — Piercing
+            <p className="eyebrow text-graphite">
+              <span className="text-stencil">(03)</span> — Piercing
             </p>
-            <span className="font-display text-7xl italic text-copper/30">◯</span>
+            <span className="font-display text-7xl italic text-stencil/30">◯</span>
           </div>
           <div>
             <h2 className="font-display text-6xl leading-[0.95] md:text-7xl">Piercing</h2>
-            <p className="mt-6 max-w-md leading-relaxed text-bone/65">
+            <p className="mt-6 max-w-md leading-relaxed text-ink/65">
               Ear curations, nose, septum, helix, conch and more — performed with sterile, single-use needles (never guns)
               and implant-grade jewellery. Ask us to curate an ear stack around the jewellery you love.
             </p>
@@ -118,15 +118,15 @@ export default function StudioPage() {
         <Reveal delay={0.1} className="relative flex flex-col justify-between gap-12 overflow-hidden border hairline p-8 md:min-h-[560px] md:p-12">
           <Image src={c.image} alt="" fill sizes="50vw" className="object-cover opacity-25" />
           <div className="relative flex items-start justify-between">
-            <p className="eyebrow text-ash">
-              <span className="text-copper">(04)</span> — Academy
+            <p className="eyebrow text-graphite">
+              <span className="text-stencil">(04)</span> — Academy
             </p>
           </div>
           <div className="relative">
             <h2 className="font-display text-6xl leading-[0.95] md:text-7xl">
-              Eden <span className="italic text-copper">Academy</span>
+              Eden <span className="italic text-stencil">Academy</span>
             </h2>
-            <p className="mt-6 max-w-md leading-relaxed text-bone/75">
+            <p className="mt-6 max-w-md leading-relaxed text-ink/75">
               Learn the craft from working artists — drawing for skin, machine handling, hygiene and the business of
               tattooing. Seminars and courses run throughout the year.
             </p>
@@ -137,7 +137,9 @@ export default function StudioPage() {
         </Reveal>
       </section>
 
-      <FinalCTA title="Come see the *space.*" />
+      <Visit />
+      <FinalCTA title="Come see
+*the space.*" />
     </>
   );
 }

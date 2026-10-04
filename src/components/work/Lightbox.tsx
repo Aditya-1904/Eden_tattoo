@@ -64,17 +64,17 @@ export function Lightbox({
           role="dialog"
           aria-modal="true"
           aria-label={item.title}
-          className="fixed inset-0 z-[85] flex flex-col bg-ink/95 backdrop-blur-sm"
+          className="theme-ink fixed inset-0 z-[85] flex flex-col bg-paper/95 backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
           <div className="container-x flex items-center justify-between py-5">
-            <span className="eyebrow tabular-nums text-ash">
+            <span className="eyebrow tabular-nums text-graphite">
               {String(index + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
             </span>
-            <button ref={closeRef} onClick={onClose} className="eyebrow rounded-full border border-bone/20 px-4 py-2.5 transition-colors hover:border-copper hover:text-copper">
+            <button ref={closeRef} onClick={onClose} className="eyebrow rounded-full border border-ink/20 px-4 py-2.5 transition-colors hover:border-stencil hover:text-stencil">
               Close ✕
             </button>
           </div>
@@ -101,10 +101,10 @@ export function Lightbox({
               </motion.div>
             </AnimatePresence>
 
-            <button onClick={() => go(-1)} aria-label="Previous" className="absolute left-4 top-1/2 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-bone/20 transition-colors hover:border-copper hover:text-copper md:flex">
+            <button onClick={() => go(-1)} aria-label="Previous" className="absolute left-4 top-1/2 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-ink/20 transition-colors hover:border-stencil hover:text-stencil md:flex">
               ←
             </button>
-            <button onClick={() => go(1)} aria-label="Next" className="absolute right-4 top-1/2 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-bone/20 transition-colors hover:border-copper hover:text-copper md:flex">
+            <button onClick={() => go(1)} aria-label="Next" className="absolute right-4 top-1/2 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-ink/20 transition-colors hover:border-stencil hover:text-stencil md:flex">
               →
             </button>
           </div>
@@ -112,11 +112,11 @@ export function Lightbox({
           <div className="container-x flex flex-wrap items-end justify-between gap-4 py-6">
             <div>
               <p className="font-display text-4xl leading-none md:text-5xl">{item.title}</p>
-              <p className="eyebrow mt-3 text-ash">
+              <p className="eyebrow mt-3 text-graphite">
                 {item.styles.map(styleName).join(" · ")} — {item.placement}
               </p>
             </div>
-            <Link href={`/book?style=${item.styles[0]}`} className="eyebrow border-b border-copper pb-1 text-copper" onClick={onClose}>
+            <Link href={`/book?style=${item.styles[0]}`} className="eyebrow border-b border-stencil pb-1 text-stencil" onClick={onClose}>
               Want something like this? →
             </Link>
           </div>

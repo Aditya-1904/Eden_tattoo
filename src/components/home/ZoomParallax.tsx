@@ -40,23 +40,23 @@ export function ZoomParallax() {
   const veil = useTransform(scrollYProgress, [0.6, 0.9], [0, 0.72]);
 
   return (
-    <section ref={ref} className="relative h-[300vh]" aria-label="Selected work">
+    <section ref={ref} className="theme-ink relative h-[300vh]" aria-label="Selected work">
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         {slots.map((slot, i) => {
           const item = workBySlug(slot.slug);
           return item ? <Slot key={slot.slug} item={item} className={slot.className} scale={slot.scale} progress={scrollYProgress} hero={i === 0} /> : null;
         })}
 
-        <motion.div style={{ opacity: veil }} className="pointer-events-none absolute inset-0 bg-ink" />
+        <motion.div style={{ opacity: veil }} className="pointer-events-none absolute inset-0 bg-paper" />
 
         <motion.div
           style={{ opacity: titleOpacity, y: titleY }}
           className="pointer-events-none absolute inset-x-0 top-24 z-10 container-x flex items-start justify-between"
         >
-          <p className="eyebrow text-ash">
-            <span className="text-copper">(03)</span> — Selected work
+          <p className="eyebrow text-graphite">
+            <span className="text-stencil">02</span> — Selected work
           </p>
-          <p className="eyebrow max-w-[16rem] text-right text-ash">Scroll — every piece drawn for one person</p>
+          <p className="eyebrow max-w-[16rem] text-right text-graphite">Scroll — every piece drawn for one person</p>
         </motion.div>
 
         <motion.div
@@ -64,7 +64,7 @@ export function ZoomParallax() {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-8 text-center"
         >
           <h2 className="font-display text-giant leading-[0.9] tracking-[-0.03em]">
-            The <span className="italic text-copper">portfolio</span>
+            The <span className="italic text-stencil">portfolio</span>
           </h2>
           <ButtonLink href="/work">Explore all work</ButtonLink>
         </motion.div>
