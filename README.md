@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Eden Tattoos — Website
 
-## Getting Started
+A dark, editorial portfolio site for **Eden Tattoos**, a custom tattoo & piercing studio in Chandigarh.
 
-First, run the development server:
+Built with **Next.js 16** (App Router) · **TypeScript** · **Tailwind CSS v4** · **Motion** · **Lenis** · **React Hook Form + Zod** · **Resend**.
+
+## Highlights
+
+- First-visit preloader, then route-transition curtains between pages
+- Hero with a cursor-driven trail of tattoo photos (auto-cycling stack on touch screens)
+- Scroll-linked manifesto, hover-reveal styles index, zoom-parallax gallery, pinned horizontal process
+- Filterable portfolio with a keyboard / swipe lightbox (`/work?style=mandala` deep-links work)
+- 4-step booking enquiry with reference-image upload → email via Resend, with WhatsApp fallback
+- SEO: per-page metadata, generated Open Graph image, sitemap, robots, `TattooParlor`, `FAQPage` and `BlogPosting` JSON-LD
+- Custom cursor, magnetic buttons, film grain; respects `prefers-reduced-motion`; responsive down to 320px
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Other scripts: `npm run build`, `npm start`, `npm run lint`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Editing content
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Everything the studio might change lives in `src/content/` — no code knowledge needed beyond editing text.
 
-## Learn More
+| File | What it controls |
+|---|---|
+| `src/content/site.ts` | Name, phone, WhatsApp, email, **address**, **opening hours**, rating, Instagram |
+| `src/content/work.ts` | Portfolio pieces and the list of styles |
+| `src/content/artists.ts` | Artist profiles |
+| `src/content/copy.ts` | Reviews, process steps, FAQ, aftercare timeline, dos & don'ts |
+| `src/content/journal.ts` | Journal / blog articles |
 
-To learn more about Next.js, take a look at the following resources:
+**Add a portfolio piece:** drop a JPG (≈1600px on the long side) into `src/assets/work/`, import it at the top of
+`work.ts`, and add an entry to the `work` array. It appears in the gallery, filters and artist page automatically.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Still to confirm with the studio
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Search the code for `TODO(client)` — each marks something written as a sensible placeholder:
 
-## Deploy on Vercel
+- **Opening hours** (currently "By appointment")
+- Artist **bios and portraits**, and any other artists besides Bhavna; which artist did each portfolio piece
+- More **full-length Google reviews** (only short excerpts are used today)
+- Hygiene standards and piercing details on `/studio` (single-use needles, no piercing guns, implant-grade jewellery)
+- Academy course details
+- Higher-resolution originals of the Instagram photos (several are 480px and look soft when large)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Booking emails (Resend)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Create a free account at [resend.com](https://resend.com) and an API key.
+2. Copy `.env.example` to `.env.local` and set `RESEND_API_KEY`.
+3. For production, verify the studio's domain in Resend and set `ENQUIRY_FROM_EMAIL` to an address on it
+   (e.g. `Eden Tattoos <bookings@edentattoos.com>`).
+
+Without a key the form still works: after the last step it opens WhatsApp with the whole enquiry pre-written.
+
+## Deploy — GitHub + Vercel
+
+```bash
+git add -A
+git commit -m "Eden Tattoos website"
+git branch -M main
+git remote add origin https://github.com/<you>/eden-tattoos.git
+git push -u origin main
+```
+
+Then on [vercel.com](https://vercel.com): **Add New → Project → Import** the repository. Vercel detects Next.js; no
+build settings are needed. Under **Settings → Environment Variables** add the keys from `.env.example`
+(`NEXT_PUBLIC_SITE_URL`, `RESEND_API_KEY`, `ENQUIRY_TO_EMAIL`, `ENQUIRY_FROM_EMAIL`) and redeploy.
+
+To use the studio's domain, add it under **Settings → Domains** and follow the DNS instructions, then set
+`NEXT_PUBLIC_SITE_URL` to it.
+
+## Project structure
+
+```
+src/
+  app/                 routes (home, work, artists/[slug], studio, aftercare, journal/[slug], book, api/enquiry)
+  components/
+    home/              homepage sections (Hero, ImageTrail, StylesIndex, ZoomParallax, Process, …)
+    layout/            Nav, Footer, Preloader
+    work/              Gallery + Lightbox
+    book/              EnquiryForm
+    ui/                Button, RevealText, Reveal, Magnetic, Marquee, Cursor, Accordion, PageHeader
+    providers/         Lenis smooth scroll + Motion config
+  content/             all editable studio content
+  assets/              portfolio photos + display font (used for the OG image)
+  lib/                 utilities, enquiry schema, hooks
+```
