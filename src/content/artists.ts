@@ -1,4 +1,5 @@
 import type { StaticImageData } from "next/image";
+import bhavnaPortrait from "@/assets/artists/bhavna.jpg";
 import mandalaSleeve from "@/assets/work/mandala-sleeve.jpg";
 import type { StyleId } from "./work";
 
@@ -6,7 +7,9 @@ export type Artist = {
   slug: string;
   name: string;
   role: string;
-  /** Portrait photo. Until one is supplied, a piece of their work is used as the cover. */
+  /** Photo of the artist, shown on the artists page, their profile and the homepage feature. */
+  portrait: StaticImageData;
+  /** A signature piece of their work, used alongside the portrait. */
   cover: StaticImageData;
   specialties: StyleId[];
   intro: string;
@@ -14,12 +17,13 @@ export type Artist = {
   instagram?: string;
 };
 
-// TODO(client): replace bios with the artists' own words and add a real portrait for each artist.
+// TODO(client): replace bios with the artists' own words.
 export const artists: Artist[] = [
   {
     slug: "bhavna",
     name: "Bhavna",
     role: "Lead Artist",
+    portrait: bhavnaPortrait,
     cover: mandalaSleeve,
     specialties: ["ornamental", "mandala", "fine-line", "spiritual"],
     intro:

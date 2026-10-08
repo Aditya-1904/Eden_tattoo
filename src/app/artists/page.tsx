@@ -31,12 +31,12 @@ export default function ArtistsPage() {
             <Link href={`/artists/${a.slug}`} data-cursor="Meet" className="block">
               <ClipReveal delay={i * 0.1} className="relative aspect-[4/5] overflow-hidden">
                 <Image
-                  src={a.cover}
-                  alt={`Work by ${a.name}`}
+                  src={a.portrait}
+                  alt={`${a.name}, ${a.role.toLowerCase()} at Eden Tattoos`}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   placeholder="blur"
-                  className="object-cover transition-transform duration-[1.6s] ease-expo group-hover:scale-105"
+                  className="object-cover object-[50%_30%] transition-transform duration-[1.6s] ease-expo group-hover:scale-105"
                 />
               </ClipReveal>
               <div className="mt-6 flex items-start justify-between gap-6 border-b hairline pb-6">

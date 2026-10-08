@@ -13,8 +13,7 @@ import { styleName, workBySlug } from "@/content/work";
 /** The lead artist, introduced with taped prints and a signature that writes itself. */
 export function ArtistSignature() {
   const artist = artists[0];
-  const main = workBySlug("filigree-forearm")!;
-  const second = workBySlug("gemini")!;
+  const second = workBySlug("filigree-forearm")!;
 
   return (
     <section className="relative overflow-hidden bg-paper-2 py-28 md:py-40" aria-label="Our artist">
@@ -29,9 +28,9 @@ export function ArtistSignature() {
           >
             <span className="tape -top-3 left-8 -rotate-6" aria-hidden />
             <div className="relative aspect-[4/5] overflow-hidden">
-              <Image src={main.image} alt={main.title} fill sizes="(max-width: 768px) 70vw, 32vw" className="object-cover" placeholder="blur" />
+              <Image src={artist.portrait} alt={`${artist.name}, ${artist.role.toLowerCase()} at Eden Tattoos`} fill sizes="(max-width: 768px) 70vw, 32vw" className="object-cover object-[50%_30%]" placeholder="blur" />
             </div>
-            <span className="hand absolute bottom-4 left-4 text-3xl text-ink">{main.title}</span>
+            <span className="hand absolute bottom-4 left-4 text-3xl text-ink">{artist.name}, in the studio</span>
           </motion.div>
           <motion.div
             className="print absolute -bottom-10 right-0 w-[46%] p-2.5 pb-10"

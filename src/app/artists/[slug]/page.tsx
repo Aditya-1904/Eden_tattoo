@@ -69,7 +69,7 @@ export default async function ArtistPage({ params }: PageProps<"/artists/[slug]"
         </div>
         <div className="md:col-span-5">
           <ClipReveal className="relative aspect-[4/5] overflow-hidden md:sticky md:top-28">
-            <Image src={artist.cover} alt={`Work by ${artist.name}`} fill priority sizes="(max-width: 768px) 100vw, 40vw" placeholder="blur" className="object-cover" />
+            <Image src={artist.portrait} alt={`${artist.name}, ${artist.role.toLowerCase()} at Eden Tattoos`} fill priority sizes="(max-width: 768px) 100vw, 40vw" placeholder="blur" className="object-cover object-[50%_30%]" />
           </ClipReveal>
         </div>
       </section>
